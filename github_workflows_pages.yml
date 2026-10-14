@@ -1,0 +1,95 @@
+# Deploy to GitHub Pages (auto-detects build output or uses repo root)
+# ضع هذا الملف في .github/workflows/pages.yml ثم ادفعه إلى الفرع الافتراضي (مثلاً main).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]   # غيّر إلى الفرع الافتراضي لديك إذا كان مختلفاً
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine build strategy and build (if needed)
+        id: build_step
+        run: |
+          set -e
+          echo "Checking for package.json to determine if we must run a build..."
+          OUTPUT_DIR="."
+          if [ -f package.json ]; then
+            echo "package.json found — running npm ci and npm run build (if script exists)..."
+            if command -v npm >/dev/null 2>&1; then
+              npm ci
+              # run build if script present
+              if jq -e '.scripts.build' package.json >/dev/null 2>&1; then
+                npm run build
+              else
+                echo "No build script in package.json — skipping npm run build"
+              fi
+            else
+              echo "npm not available on runner"
+            fi
+            # common output directories from various static site tools
+            for d in build dist public out _site; do
+              if [ -d "$d" ]; then
+                OUTPUT_DIR="$d"
+                break
+              fi
+            done
+          else
+            echo "No package.json — assuming static site in repo root."
+            OUTPUT_DIR="."
+          fi
+
+          # Ensure index.html exists at root of OUTPUT_DIR (best-effort check)
+          if [ -f "${OUTPUT_DIR}/index.html" ]; then
+            echo "Found index.html in ${OUTPUT_DIR}"
+          else
+            echo "Warning: index.html not found in ${OUTPUT_DIR}. Deployment may fail if no index.html present."
+          fi
+
+          echo "OUTPUT_DIR=${OUTPUT_DIR}" >> $GITHUB_ENV
+          echo "Determined OUTPUT_DIR=${OUTPUT_DIR}"
+          echo "Contents of ${OUTPUT_DIR}:"
+          ls -la "${OUTPUT_DIR}" || true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # uses the env variable set above; must be path to directory that contains index.html
+          path: ${{ env.OUTPUT_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Show published URL
+        if: always()
+        run: |
+          echo "Deployment step completed. The Pages URL is available in the environment or in the Actions UI."
