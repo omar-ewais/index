@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111020" />
+  <title>Happy Birthday, Sama!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="games.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Birthday Experience home"><span class="brand-mark">✦</span> birthday<span>experience</span></a>
+    <div class="top-actions">
+      <button class="icon-button" id="soundToggle" aria-label="Toggle sound" title="Toggle sound">♫ <span id="soundLabel">Sound off</span></button>
+      <button class="icon-button" id="restartBtn" title="Start over">↻ <span>Restart</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="screen active" id="intro" aria-labelledby="introTitle">
+      <div class="intro-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> A BIRTHDAY SURPRISE FOR YOU</p>
+        <h1 id="introTitle">Happy Birthday,<br/><em>Sama!</em></h1>
+        <p class="lead">Hope your day is full of fun, cake, and all your favorite things.</p>
+        <div class="intro-meta"><span>✧ Birthday surprises</span><span>✧ Made just for you</span><span>✧ Best enjoyed with sound</span></div>
+        <button class="primary-button" id="startBtn">Start the celebration <span>↗</span></button>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a glowing birthday gift">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="hero-star star-a">✦</div><div class="hero-star star-b">✧</div><div class="hero-star star-c">✦</div>
+        <div class="gift-glow"></div>
+        <div class="gift-box"><div class="gift-lid"><div class="ribbon"></div></div><div class="gift-body"><div class="ribbon vertical"></div></div><div class="gift-bow"><i></i><i></i></div></div>
+        <div class="hero-caption"><span class="caption-line"></span><span>A surprise is waiting</span><span class="caption-line"></span></div>
+      </div>
+      <div class="scroll-hint">SCROLL LESS, DISCOVER MORE <span>↓</span></div>
+    </section>
+
+    <section class="screen" id="gift" aria-labelledby="giftTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 01 · A SURPRISE</p><h2 id="giftTitle">A little box.<br/><em>A little surprise.</em></h2><p>Tap the gift to see what's inside.</p></div>
+      <button class="interactive-gift" id="openGift" aria-label="Open the birthday gift"><span class="gift-spark">✦</span><span class="gift-emoji">🎁</span><span class="gift-tap">TAP TO OPEN</span></button>
+      <div class="reveal-message hidden" id="giftReveal"><span class="reveal-icon">✧</span><h3>Happy Birthday, Sama!</h3><p>Wishing you a fun day, a delicious cake, and a great year ahead.</p><button class="text-button next-btn" data-next="cake">Keep going <span>→</span></button></div>
+    </section>
+
+    <section class="screen" id="cake" aria-labelledby="cakeTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 02 · MAKE A WISH</p><h2 id="cakeTitle">Close your eyes.<br/><em>Wish big.</em></h2><p>Tap each candle to blow it out. Save your biggest wish for last.</p></div>
+      <div class="cake-scene">
+        <div class="cake-sparkles">✦　✧　✦</div>
+        <div class="candles">
+          <button class="candle lit" aria-label="Blow out candle 1"><span class="flame"></span><span class="wick"></span></button>
+          <button class="candle lit" aria-label="Blow out candle 2"><span class="flame"></span><span class="wick"></span></button>
+          <button class="candle lit" aria-label="Blow out candle 3"><span class="flame"></span><span class="wick"></span></button>
+        </div>
+        <div class="cake-top"></div><div class="cake-body"><div class="icing-drip"></div><div class="cake-decoration">✦　♡　✦</div></div><div class="cake-plate"></div>
+      </div>
+      <p class="candle-count" id="candleCount">3 little wishes still glowing</p>
+      <div class="wish-result hidden" id="wishResult"><h3>Wish sent ✨</h3><p>Hope the year ahead brings you lots of fun and good surprises.</p><button class="primary-button next-btn" data-next="games">Play a little <span>↗</span></button></div>
+    </section>
+
+    <section class="screen" id="games" aria-labelledby="gamesTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 03 · PARTY GAMES</p><h2 id="gamesTitle">Pick your game.<br/><em>Make a little chaos.</em></h2><p>19 birthday games, one tiny arcade.</p></div>
+      <div class="arcade-menu" id="arcadeMenu">
+        <div class="arcade-toolbar"><span>Choose your next challenge</span><strong><span id="arcadeCompleted">0</span> / 19 complete</strong></div>
+        <div class="arcade-grid" id="arcadeGrid" aria-label="Birthday games"></div>
+      </div>
+      <section class="arcade-stage" id="arcadeStage" aria-labelledby="arcadeGameTitle" hidden>
+        <button class="arcade-back" id="arcadeBack" type="button">← All games</button>
+        <div class="arcade-stage-heading"><span class="arcade-stage-icon" id="arcadeGameIcon"></span><div><h3 id="arcadeGameTitle"></h3><p id="arcadeGameInstruction"></p></div></div>
+        <div class="arcade-content" id="arcadeGameContent"></div>
+        <p class="arcade-status" id="arcadeStatus" role="status" aria-live="polite"></p>
+        <div class="arcade-stage-actions"><button class="secondary-button" id="arcadeRestart" type="button">Play again ↻</button><button class="text-button" id="arcadeBackBottom" type="button">Back to all games</button></div>
+      </section>
+      <button class="primary-button next-btn games-next" data-next="quest">Continue to your quest <span>↗</span></button>
+    </section>
+
+    <section class="screen" id="quest" aria-labelledby="questTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 04 · A TINY CHALLENGE</p><h2 id="questTitle">Birthday<br/><em>quest.</em></h2><p>Three quick picks. No wrong answers — just a little fun.</p></div>
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-progress"><span id="quizStep">QUESTION 01 / 03</span><div class="progress-track"><span id="quizProgress"></span></div></div>
+        <h3 id="questionText">Pick your birthday mood.</h3>
+        <div class="answer-grid" id="answerGrid"></div>
+        <p class="quiz-note" id="quizNote">Go with your first instinct ✨</p>
+      </div>
+      <div class="quiz-result hidden" id="quizResult"><div class="result-medal">✦</div><h3>Quest complete!</h3><p>You’ve earned the official birthday explorer badge.</p><div class="badge-earned">✧ BIRTHDAY EXPLORER ✧</div><button class="primary-button next-btn" data-next="memories">See your memories <span>↗</span></button></div>
+    </section>
+
+    <section class="screen" id="memories" aria-labelledby="memoriesTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 05 · LITTLE MOMENTS</p><h2 id="memoriesTitle">The things<br/><em>worth keeping.</em></h2><p>Every year is made of moments. Here are a few little reminders to keep close.</p></div>
+      <div class="memory-grid">
+        <button class="memory-card memory-one" data-memory="Some memories become stories we tell forever."><span class="memory-art">☼</span><span class="memory-label">THE BRIGHT DAYS</span><span class="memory-title">More sunshine, please.</span><span class="memory-open">Open memory ↗</span></button>
+        <button class="memory-card memory-two" data-memory="The best adventures are often the ones we never planned."><span class="memory-art">✈</span><span class="memory-label">THE ADVENTURES</span><span class="memory-title">Keep exploring.</span><span class="memory-open">Open memory ↗</span></button>
+        <button class="memory-card memory-three" data-memory="Never underestimate the little things that make you smile."><span class="memory-art">♡</span><span class="memory-label">THE LITTLE THINGS</span><span class="memory-title">Collect tiny joys.</span><span class="memory-open">Open memory ↗</span></button>
+      </div>
+      <div class="memory-detail hidden" id="memoryDetail"><span>✧ A NOTE TO KEEP</span><p id="memoryText"></p><button class="text-button" id="closeMemory">Close note ×</button></div>
+      <button class="primary-button centered next-btn" data-next="messages">One more thing <span>↗</span></button>
+    </section>
+
+    <section class="screen" id="messages" aria-labelledby="messagesTitle">
+      <div class="section-heading"><p class="eyebrow">CHAPTER 06 · A BIRTHDAY NOTE</p><h2 id="messagesTitle">One more<br/><em>birthday wish.</em></h2><p>Open your birthday note.</p></div>
+      <div class="message-envelope" id="envelope">
+        <div class="envelope-back"></div><div class="letter"><span class="letter-kicker">HAPPY BIRTHDAY, SAMA</span><p id="letterText">Wishing you a wonderful birthday and a year filled with fun, new adventures, and plenty of cake!</p><span class="letter-sign">From omar</span></div><div class="envelope-front"></div><div class="envelope-flap"></div>
+      </div>
+      <button class="primary-button centered" id="openLetter">Open your note <span>✧</span></button>
+      <p class="small-note">Have the best birthday!</p>
+      <button class="text-button next-btn hidden" id="letterNext" data-next="finale">Ready for the finale? <span>→</span></button>
+    </section>
+
+    <section class="screen finale-screen" id="finale" aria-labelledby="finalTitle">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+      <div class="final-content album-content"><p class="eyebrow">A FEW FAVORITE MOMENTS</p><div class="final-star">✦</div><h2 id="finalTitle">Happy Birthday,<br/><em>Sama!</em></h2><p class="final-copy">Hope you have a wonderful day!</p><label class="primary-button album-upload" for="photoPicker">Choose photos <span>↑</span></label><input class="visually-hidden" id="photoPicker" type="file" accept="image/*" multiple /><p class="album-empty" id="albumEmpty">Your photo album will appear here.</p><div class="album-grid" id="photoAlbum" aria-live="polite"></div><p class="small-note hidden" id="albumCount"></p><div class="final-actions"><button class="secondary-button" id="replayBtn">Replay the celebration ↻</button></div></div>
+      <div class="footer-note">HAPPY BIRTHDAY, SAMA <span>✦</span></div>
+    </section>
+  </main>
+
+  <div class="chapter-nav" id="chapterNav" aria-label="Journey progress">
+    <span class="chapter-label" id="chapterLabel">YOUR JOURNEY</span>
+    <div class="chapter-dots">
+      <button class="chapter-dot current" data-screen="intro" aria-label="Go to introduction"></button>
+      <button class="chapter-dot" data-screen="gift" aria-label="Go to gift"></button>
+      <button class="chapter-dot" data-screen="cake" aria-label="Go to cake"></button>
+      <button class="chapter-dot" data-screen="games" aria-label="Go to party games"></button>
+      <button class="chapter-dot" data-screen="quest" aria-label="Go to quest"></button>
+      <button class="chapter-dot" data-screen="memories" aria-label="Go to memories"></button>
+      <button class="chapter-dot" data-screen="messages" aria-label="Go to messages"></button>
+      <button class="chapter-dot" data-screen="finale" aria-label="Go to finale"></button>
+    </div>
+    <span class="chapter-number" id="chapterNumber">01 / 08</span>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
