@@ -1,0 +1,544 @@
+#games.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.games-grid {
+  width: min(100%, 920px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mini-game {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.mini-game-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.game-icon {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--gold);
+  background: rgba(243, 201, 120, 0.12);
+}
+
+.mini-game h3 {
+  margin: 0 0 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+}
+
+.mini-game-heading p,
+.game-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.game-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.game-score strong {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.star-board,
+.memory-game-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, 260px);
+  margin: 0 auto 12px;
+}
+
+.star-tile,
+.memory-game-tile {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: #d2cbe2;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 24px;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.star-tile:hover:not(:disabled),
+.memory-game-tile:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(243, 201, 120, 0.55);
+  background: rgba(243, 201, 120, 0.1);
+}
+
+.star-tile.found,
+.memory-game-tile.matched {
+  color: var(--gold);
+  border-color: rgba(243, 201, 120, 0.65);
+  background: rgba(243, 201, 120, 0.16);
+}
+
+.star-tile.missed {
+  color: #858095;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.memory-game-tile {
+  aspect-ratio: 1.15;
+  font-size: 27px;
+}
+
+.memory-game-tile.flipped {
+  color: var(--ink);
+  border-color: rgba(230, 169, 212, 0.6);
+  background: rgba(230, 169, 212, 0.13);
+}
+
+.memory-game-tile.matched {
+  color: #f2d6e9;
+  border-color: rgba(230, 169, 212, 0.55);
+  background: rgba(230, 169, 212, 0.1);
+}
+
+.game-status {
+  min-height: 20px;
+  text-align: center;
+}
+
+.game-reset {
+  display: block;
+  margin: 8px auto 0;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.games-next {
+  margin-top: 22px;
+}
+
+@media (max-width: 760px) {
+  body.games-screen-active .chapter-nav {
+    position: static;
+    inset: auto;
+    transform: none;
+    margin: 18px auto 14px;
+  }
+
+  .games-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 440px;
+  }
+
+  .mini-game {
+    padding: 18px;
+  }
+
+  .star-board,
+  .memory-game-board {
+    width: min(100%, 240px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-tile,
+  .memory-game-tile {
+    transition: none;
+  }
+}
+
+.arcade-menu {
+  width: min(100%, 1040px);
+}
+
+.arcade-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.arcade-toolbar strong {
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.arcade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+  gap: 12px;
+}
+
+.arcade-game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 150px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.045);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.arcade-game-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(243, 201, 120, 0.48);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.arcade-game-card.completed {
+  border-color: rgba(148, 211, 176, 0.5);
+}
+
+.arcade-card-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: var(--gold);
+  background: rgba(243, 201, 120, 0.1);
+  font-size: 18px;
+}
+
+.arcade-card-title {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.arcade-card-description {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.arcade-card-state {
+  align-self: flex-end;
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--gold);
+  font-size: 10px;
+}
+
+.arcade-game-card.completed .arcade-card-state {
+  color: #a8e0bd;
+}
+
+.arcade-stage[hidden],
+.arcade-menu[hidden] {
+  display: none !important;
+}
+
+.arcade-stage {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.arcade-back,
+.arcade-stage-actions .text-button {
+  padding: 4px 0;
+  border: 0;
+  color: var(--gold);
+  background: transparent;
+  font-size: 12px;
+}
+
+.arcade-stage-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 20px;
+}
+
+.arcade-stage-icon {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--gold);
+  background: rgba(243, 201, 120, 0.12);
+  font-size: 22px;
+}
+
+.arcade-stage-heading h3 {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+}
+
+.arcade-stage-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.arcade-content {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-height: 130px;
+  text-align: center;
+}
+
+.arcade-status {
+  min-height: 22px;
+  margin: 12px 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.arcade-stage-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.arcade-stage-actions .secondary-button,
+.game-action-button {
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid rgba(243, 201, 120, 0.45);
+  border-radius: 10px;
+  color: #211b10;
+  background: var(--gold);
+  font-weight: 700;
+}
+
+.game-choice-grid,
+.gift-choice-grid,
+.color-choice-grid,
+.sequence-grid,
+.candle-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  gap: 9px;
+  width: min(100%, 500px);
+}
+
+.game-choice,
+.gift-choice,
+.candle-choice,
+.sequence-button,
+.color-choice,
+.bingo-tile,
+.star-tile,
+.memory-arcade-tile,
+.balloon-button {
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.game-choice:hover,
+.gift-choice:hover,
+.candle-choice:hover,
+.sequence-button:hover,
+.color-choice:hover,
+.bingo-tile:hover,
+.star-tile:hover:not(:disabled),
+.memory-arcade-tile:hover:not(:disabled),
+.balloon-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(243, 201, 120, 0.6);
+  background: rgba(243, 201, 120, 0.1);
+}
+
+.game-counter,
+.sequence-clue {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.cake-catch-arena {
+  position: relative;
+  width: min(100%, 540px);
+  height: 290px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.035);
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  touch-action: pan-y;
+}
+
+.catch-score {
+  display: flex;
+  justify-content: space-between;
+  width: min(100%, 540px);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.catch-score strong { color: var(--gold); }
+
+.cake-catch-basket {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 2;
+  font-size: 40px;
+  transform: translateX(-50%);
+  transition: left 0.08s linear;
+}
+
+.falling-cake {
+  position: absolute;
+  top: 0;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.catch-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.catch-controls button {
+  width: 62px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  background: rgba(255,255,255,.07);
+  font-size: 20px;
+  touch-action: manipulation;
+}
+
+.star-hunt-grid,
+.memory-arcade-grid,
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(54px, 76px));
+  gap: 8px;
+}
+
+.star-tile,
+.memory-arcade-tile,
+.bingo-tile {
+  display: grid;
+  min-height: 64px;
+  place-items: center;
+  padding: 4px;
+  font-size: 23px;
+}
+
+.star-tile.found,
+.bingo-tile.found,
+.memory-arcade-tile.matched,
+.gift-choice.gift-winner {
+  border-color: rgba(243, 201, 120, 0.7);
+  color: var(--gold);
+  background: rgba(243, 201, 120, 0.15);
+}
+
+.star-tile.missed,
+.gift-choice.gift-miss {
+  opacity: .5;
+}
+
+.memory-arcade-tile.flipped { background: rgba(230, 169, 212, .14); }
+.balloon-grid { display: grid; grid-template-columns: repeat(4, 60px); gap: 10px; }
+.balloon-button { min-height: 62px; padding: 6px; font-size: 27px; }
+.balloon-button.popped { opacity: .55; }
+.gift-choice { min-height: 78px; font-size: 28px; }
+.scrambled-word { margin: 0; color: var(--gold); font-size: 30px; font-weight: 700; }
+.game-input-label { color: var(--muted); font-size: 12px; }
+.game-input-row { display: flex; gap: 8px; width: min(100%, 420px); }
+.game-input { min-width: 0; flex: 1; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: rgba(255,255,255,.07); }
+.reaction-button { min-width: min(100%, 300px); min-height: 100px; border: 0; border-radius: 14px; color: #1d1724; background: var(--pink); font-size: 22px; font-weight: 800; }
+.reaction-button.waiting { color: var(--ink); background: rgba(255,255,255,.08); }
+.reaction-time { margin: 0; color: var(--gold); font-size: 20px; }
+.cake-preview { font-size: 54px; }
+.candle-choice { min-height: 72px; font-size: 28px; }
+.candle-choice.lit-correct { background: rgba(243,201,120,.16); }
+.color-prompt { min-height: 44px; font-size: 30px; font-weight: 800; }
+.color-choice { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.color-choice::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--swatch); }
+.tap-target { width: min(100%, 260px); min-height: 110px; border: 0; border-radius: 16px; color: #211b10; background: var(--gold); font-size: 28px; font-weight: 800; }
+.dice-display { color: var(--gold); font-size: 58px; }
+.bingo-tile { min-height: 68px; }
+.maze-board { display: grid; grid-template-columns: repeat(4, 48px); gap: 5px; }
+.maze-cell { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--line); border-radius: 7px; background: rgba(255,255,255,.045); font-size: 20px; }
+.maze-cell.wall { background: rgba(230,169,212,.16); }
+.maze-controls { display: grid; grid-template-columns: repeat(3, 44px); gap: 6px; }
+.maze-controls button { min-height: 38px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: rgba(255,255,255,.07); font-size: 18px; }
+.maze-controls button:nth-child(1) { grid-column: 2; }
+.sequence-button { min-height: 54px; font-size: 20px; }
+.wish-result-card { display: grid; min-height: 120px; width: min(100%, 420px); place-items: center; padding: 20px; border: 1px solid var(--line); border-radius: 14px; color: var(--gold); background: rgba(255,255,255,.055); font-family: 'Playfair Display', serif; font-size: 20px; }
+.wish-result-card.spinning { animation: wishSpin .85s ease-in-out; }
+@keyframes wishSpin { 50% { transform: rotate(8deg) scale(.96); } }
+
+@media (max-width: 760px) {
+  .arcade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .arcade-game-card { min-height: 142px; padding: 12px; }
+  .arcade-card-title { font-size: 13px; }
+  .arcade-card-description { font-size: 10px; }
+  .arcade-stage { padding: 16px; }
+  .arcade-stage-heading h3 { font-size: 20px; }
+  .arcade-stage-actions { flex-wrap: wrap; }
+  .cake-catch-arena { height: 250px; }
+  .balloon-grid { grid-template-columns: repeat(4, minmax(42px, 58px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-game-card,
+  .game-choice,
+  .gift-choice,
+  .candle-choice,
+  .sequence-button,
+  .color-choice,
+  .bingo-tile,
+  .star-tile,
+  .memory-arcade-tile,
+  .balloon-button { transition: none; }
+  .wish-result-card.spinning { animation: none; }
+}
